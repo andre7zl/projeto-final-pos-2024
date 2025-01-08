@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
-const PostForm = ({ postToEdit, onSave }) => {
-  const [post, setPost] = useState({
+const ToDoForm = ({ todoToEdit, onSave }) => {
+  const [todo, setToDo] = useState({
     title: '',
-    body: '',
     user: '',
+    completed: false,
   });
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (postToEdit) {
-      setPost(postToEdit);
+    if (todoToEdit) {
+      setToDo(todoToEdit);
     }
 
     api.get('/users/')
       .then((response) => setUsers(response.data))
       .catch((error) => console.error('Error fetching users:', error));
-  }, [postToEdit]);
+  }, [todoToEdit]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPost((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === 'checkbox' ? checked : value;
+    setToDo((prev) => ({ ...prev, [name]: fieldValue }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (post.id) {
-      api.put(`/posts/${post.id}/`, post)
+    if (todo.id) {
+      api.put(`/todos/${todo.id}/`, todo)
         .then(() => onSave())
-        .catch((error) => console.error('Error updating post:', error));
+        .catch((error) => console.error('Error updating ToDo:', error));
     } else {
-      api.post('/posts/', post)
+      api.post('/todos/', todo)
         .then(() => onSave())
-        .catch((error) => console.error('Error creating post:', error));
+        .catch((error) => console.error('Error creating ToDo:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{post.id ? 'Edit Post' : 'Create Post'}</h5>
+        <h5 className="card-title">{todo.id ? 'Edit ToDo' : 'Create ToDo'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
@@ -49,18 +50,7 @@ const PostForm = ({ postToEdit, onSave }) => {
               id="title"
               name="title"
               className="form-control"
-              value={post.title}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="body" className="form-label">Body</label>
-            <textarea
-              id="body"
-              name="body"
-              className="form-control"
-              value={post.body}
+              value={todo.title}
               onChange={handleChange}
               required
             />
@@ -71,7 +61,7 @@ const PostForm = ({ postToEdit, onSave }) => {
               id="user"
               name="user"
               className="form-select"
-              value={post.user}
+              value={todo.user}
               onChange={handleChange}
               required
             >
@@ -83,8 +73,19 @@ const PostForm = ({ postToEdit, onSave }) => {
               ))}
             </select>
           </div>
+          <div className="mb-3 form-check">
+            <input
+              type="checkbox"
+              id="completed"
+              name="completed"
+              className="form-check-input"
+              checked={todo.completed}
+              onChange={handleChange}
+            />
+            <label htmlFor="completed" className="form-check-label">Completed</label>
+          </div>
           <button type="submit" className="btn btn-primary">
-            {post.id ? 'Update' : 'Create'}
+            {todo.id ? 'Update' : 'Create'}
           </button>
         </form>
       </div>
@@ -92,4 +93,4 @@ const PostForm = ({ postToEdit, onSave }) => {
   );
 };
 
-export default PostForm;
+export default ToDoForm;
