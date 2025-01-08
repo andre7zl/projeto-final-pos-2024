@@ -20,27 +20,50 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/users" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/users"
+              >
                 Users
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/posts" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/posts"
+              >
                 Posts
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/todos" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/todos"
+              >
                 ToDos
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/albums" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/albums"
+              >
                 Albums
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/comments" activeClassName="active">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/photos"
+              >
+                Photos
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                to="/comments"
+              >
                 Comments
               </NavLink>
             </li>
