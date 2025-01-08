@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import ToDosPage from './pages/ToDosPage';
 import UsersPage from './pages/UsersPage';
 import PostsPage from './pages/PostsPage';
+import CommentsPage from './pages/CommentsPage';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/todos" element={<ToDosPage />} />
+        <Route path="/comments" element={<CommentsPage />} />
       </Routes>
     </Router>
   );

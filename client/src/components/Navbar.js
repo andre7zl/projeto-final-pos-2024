@@ -39,6 +39,11 @@ const Navbar = () => {
                 Albums
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/comments" activeClassName="active">
+                Comments
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
