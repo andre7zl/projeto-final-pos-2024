@@ -16,7 +16,7 @@ const PostForm = ({ postToEdit, onSave }) => {
 
     api.get('/users/')
       .then((response) => setUsers(response.data))
-      .catch((error) => console.error('Error fetching users:', error));
+      .catch((error) => console.error('Erro ao buscar usuários:', error));
   }, [postToEdit]);
 
   const handleChange = (e) => {
@@ -29,21 +29,21 @@ const PostForm = ({ postToEdit, onSave }) => {
     if (post.id) {
       api.put(`/posts/${post.id}/`, post)
         .then(() => onSave())
-        .catch((error) => console.error('Error updating post:', error));
+        .catch((error) => console.error('Erro ao atualizar o post:', error));
     } else {
       api.post('/posts/', post)
         .then(() => onSave())
-        .catch((error) => console.error('Error creating post:', error));
+        .catch((error) => console.error('Erro ao criar o post:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{post.id ? 'Edit Post' : 'Create Post'}</h5>
+        <h5 className="card-title">{post.id ? 'Editar Postagem' : 'Criar Postagem'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
+            <label htmlFor="title" className="form-label">Título</label>
             <input
               type="text"
               id="title"
@@ -55,7 +55,7 @@ const PostForm = ({ postToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="body" className="form-label">Body</label>
+            <label htmlFor="body" className="form-label">Conteúdo</label>
             <textarea
               id="body"
               name="body"
@@ -66,7 +66,7 @@ const PostForm = ({ postToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="user" className="form-label">User</label>
+            <label htmlFor="user" className="form-label">Usuário</label>
             <select
               id="user"
               name="user"
@@ -75,7 +75,7 @@ const PostForm = ({ postToEdit, onSave }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Select a user</option>
+              <option value="">Selecione um usuário</option>
               {users.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name} ({user.username})
@@ -84,7 +84,7 @@ const PostForm = ({ postToEdit, onSave }) => {
             </select>
           </div>
           <button type="submit" className="btn btn-primary">
-            {post.id ? 'Update' : 'Create'}
+            {post.id ? 'Atualizar' : 'Criar'}
           </button>
         </form>
       </div>

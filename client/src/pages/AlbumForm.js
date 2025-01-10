@@ -15,7 +15,7 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
 
     api.get('/users/')
       .then(response => setUsers(response.data))
-      .catch(error => console.error('Error fetching users:', error));
+      .catch(error => console.error('Erro ao buscar usuários:', error));
   }, [albumToEdit]);
 
   const handleChange = (e) => {
@@ -29,21 +29,21 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
     if (album.id) {
       api.put(`/albums/${album.id}/`, album)
         .then(() => onSave())
-        .catch(error => console.error('Error updating album:', error));
+        .catch(error => console.error('Erro ao atualizar álbum:', error));
     } else {
       api.post('/albums/', album)
         .then(() => onSave())
-        .catch(error => console.error('Error creating album:', error));
+        .catch(error => console.error('Erro ao criar álbum:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{album.id ? 'Edit Album' : 'Create Album'}</h5>
+        <h5 className="card-title">{album.id ? 'Editar Álbum' : 'Criar Álbum'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
+            <label htmlFor="title" className="form-label">Título</label>
             <input
               type="text"
               id="title"
@@ -55,7 +55,7 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="user" className="form-label">User</label>
+            <label htmlFor="user" className="form-label">Usuário</label>
             <select
               id="user"
               name="user"
@@ -64,7 +64,7 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Select a user</option>
+              <option value="">Selecione um usuário</option>
               {users.map(user => (
                 <option key={user.id} value={user.id}>
                   {user.name} ({user.username})
@@ -73,7 +73,7 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
             </select>
           </div>
           <button type="submit" className="btn btn-primary">
-            {album.id ? 'Update' : 'Create'}
+            {album.id ? 'Atualizar' : 'Criar'}
           </button>
         </form>
       </div>

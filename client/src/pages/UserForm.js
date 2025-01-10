@@ -27,21 +27,21 @@ const UserForm = ({ userToEdit, onSave }) => {
     if (user.id) {
       api.put(`/users/${user.id}/`, user)
         .then(() => onSave())
-        .catch((error) => console.error('Error updating user:', error));
+        .catch((error) => console.error('Erro ao atualizar usuário:', error));
     } else {
       api.post('/users/', user)
         .then(() => onSave())
-        .catch((error) => console.error('Error creating user:', error));
+        .catch((error) => console.error('Erro ao criar usuário:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{user.id ? 'Edit User' : 'Create User'}</h5>
+        <h5 className="card-title">{user.id ? 'Editar Usuário' : 'Criar Usuário'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
+            <label htmlFor="name" className="form-label">Nome</label>
             <input
               type="text"
               id="name"
@@ -53,7 +53,7 @@ const UserForm = ({ userToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="username" className="form-label">Usuário</label>
             <input
               type="text"
               id="username"
@@ -77,7 +77,7 @@ const UserForm = ({ userToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="phone" className="form-label">Phone</label>
+            <label htmlFor="phone" className="form-label">Telefone</label>
             <input
               type="text"
               id="phone"
@@ -88,7 +88,7 @@ const UserForm = ({ userToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="website" className="form-label">Website</label>
+            <label htmlFor="website" className="form-label">Site</label>
             <input
               type="url"
               id="website"
@@ -99,7 +99,7 @@ const UserForm = ({ userToEdit, onSave }) => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            {user.id ? 'Update User' : 'Create User'}
+            {user.id ? 'Atualizar Usuário' : 'Criar Usuário'}
           </button>
         </form>
       </div>

@@ -11,7 +11,7 @@ const UsersPage = () => {
       .then(response => {
         setUsers(response.data);
       })
-      .catch(error => console.error('Error fetching users:', error));
+      .catch(error => console.error('Erro ao buscar usuários:', error));
   }, []);
 
   const handleEdit = (userId) => {
@@ -19,16 +19,16 @@ const UsersPage = () => {
       .then(response => {
         setEditingUser(response.data);
       })
-      .catch(error => console.error('Error fetching user:', error));
+      .catch(error => console.error('Erro ao buscar usuário:', error));
   };
 
   const handleDelete = (userId) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
+    if (window.confirm('Tem certeza de que deseja excluir este usuário?')) {
       api.delete(`/users/${userId}/`)
         .then(() => {
           setUsers(users.filter(user => user.id !== userId));
         })
-        .catch(error => console.error('Error deleting user:', error));
+        .catch(error => console.error('Erro ao excluir usuário:', error));
     }
   };
 
@@ -38,22 +38,22 @@ const UsersPage = () => {
       .then(response => {
         setUsers(response.data);
       })
-      .catch(error => console.error('Error fetching users:', error));
+      .catch(error => console.error('Erro ao buscar usuários:', error));
   };
 
   return (
     <div className="container">
-      <h1>Users List</h1>
+      <h1>Lista de Usuários</h1>
       <button onClick={() => setEditingUser({})} className="btn btn-success mb-3">
-        Create User
+        Criar Usuário
       </button>
       <div>
         {users.map(user => (
           <div key={user.id} className="d-flex justify-content-between mb-2">
             <span>{user.name}</span>
             <div>
-              <button onClick={() => handleEdit(user.id)} className="btn btn-primary mr-2">Edit</button>
-              <button onClick={() => handleDelete(user.id)} className="btn btn-danger">Delete</button>
+              <button onClick={() => handleEdit(user.id)} className="btn btn-primary me-2">Editar</button>
+              <button onClick={() => handleDelete(user.id)} className="btn btn-danger">Excluir</button>
             </div>
           </div>
         ))}

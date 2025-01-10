@@ -16,7 +16,7 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
 
     api.get('/users/')
       .then((response) => setUsers(response.data))
-      .catch((error) => console.error('Error fetching users:', error));
+      .catch((error) => console.error('Erro ao buscar usuários:', error));
   }, [todoToEdit]);
 
   const handleChange = (e) => {
@@ -30,21 +30,21 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
     if (todo.id) {
       api.put(`/todos/${todo.id}/`, todo)
         .then(() => onSave())
-        .catch((error) => console.error('Error updating ToDo:', error));
+        .catch((error) => console.error('Erro ao atualizar ToDo:', error));
     } else {
       api.post('/todos/', todo)
         .then(() => onSave())
-        .catch((error) => console.error('Error creating ToDo:', error));
+        .catch((error) => console.error('Erro ao criar ToDo:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{todo.id ? 'Edit ToDo' : 'Create ToDo'}</h5>
+        <h5 className="card-title">{todo.id ? 'Editar ToDo' : 'Criar ToDo'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
+            <label htmlFor="title" className="form-label">Título</label>
             <input
               type="text"
               id="title"
@@ -56,7 +56,7 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="user" className="form-label">User</label>
+            <label htmlFor="user" className="form-label">Usuário</label>
             <select
               id="user"
               name="user"
@@ -65,7 +65,7 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Select a user</option>
+              <option value="">Selecione um usuário</option>
               {users.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name} ({user.username})
@@ -82,10 +82,10 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
               checked={todo.completed}
               onChange={handleChange}
             />
-            <label htmlFor="completed" className="form-check-label">Completed</label>
+            <label htmlFor="completed" className="form-check-label">Concluído</label>
           </div>
           <button type="submit" className="btn btn-primary">
-            {todo.id ? 'Update' : 'Create'}
+            {todo.id ? 'Atualizar' : 'Criar'}
           </button>
         </form>
       </div>

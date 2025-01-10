@@ -7,18 +7,18 @@ const UserList = ({ onEdit, onDelete }) => {
   useEffect(() => {
     api.get('/users/')
       .then(response => setUsers(response.data))
-      .catch(error => console.error('Error fetching users:', error));
+      .catch(error => console.error('Erro ao buscar usuários:', error));
   }, []);
 
   return (
     <div>
-      <h2>User List</h2>
+      <h2>Lista de Usuários</h2>
       <ul>
         {users.map(user => (
           <li key={user.id}>
             {user.name} ({user.email}){' '}
-            <button onClick={() => onEdit(user)}>Edit</button>
-            <button onClick={() => onDelete(user.id)}>Delete</button>
+            <button onClick={() => onEdit(user)}>Editar</button>
+            <button onClick={() => onDelete(user.id)}>Excluir</button>
           </li>
         ))}
       </ul>

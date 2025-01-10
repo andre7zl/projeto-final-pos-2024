@@ -17,7 +17,7 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
 
     api.get('/albums/')
       .then(response => setAlbums(response.data))
-      .catch(error => console.error('Error fetching albums:', error));
+      .catch(error => console.error('Erro ao buscar álbuns:', error));
   }, [photoToEdit]);
 
   const handleChange = (e) => {
@@ -31,21 +31,21 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
     if (photo.id) {
       api.put(`/photos/${photo.id}/`, photo)
         .then(() => onSave())
-        .catch(error => console.error('Error updating photo:', error));
+        .catch(error => console.error('Erro ao atualizar a foto:', error));
     } else {
       api.post('/photos/', photo)
         .then(() => onSave())
-        .catch(error => console.error('Error creating photo:', error));
+        .catch(error => console.error('Erro ao criar a foto:', error));
     }
   };
 
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h5 className="card-title">{photo.id ? 'Edit Photo' : 'Create Photo'}</h5>
+        <h5 className="card-title">{photo.id ? 'Editar Foto' : 'Criar Foto'}</h5>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
+            <label htmlFor="title" className="form-label">Título</label>
             <input
               type="text"
               id="title"
@@ -69,7 +69,7 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="thumbnail_url" className="form-label">Thumbnail URL</label>
+            <label htmlFor="thumbnail_url" className="form-label">URL da Miniatura</label>
             <input
               type="url"
               id="thumbnail_url"
@@ -81,7 +81,7 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="album" className="form-label">Album</label>
+            <label htmlFor="album" className="form-label">Álbum</label>
             <select
               id="album"
               name="album"
@@ -90,7 +90,7 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
               onChange={handleChange}
               required
             >
-              <option value="">Select an album</option>
+              <option value="">Selecione um álbum</option>
               {albums.map(album => (
                 <option key={album.id} value={album.id}>
                   {album.title}
@@ -99,7 +99,7 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
             </select>
           </div>
           <button type="submit" className="btn btn-primary">
-            {photo.id ? 'Update Photo' : 'Create Photo'}
+            {photo.id ? 'Atualizar Foto' : 'Criar Foto'}
           </button>
         </form>
       </div>

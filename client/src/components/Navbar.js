@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">CRUD App</Link>
+        <Link className="navbar-brand" to="/">Meu App</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -13,7 +13,7 @@ const Navbar = () => {
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation"
+          aria-label="Alternar navegação"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -24,7 +24,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/users"
               >
-                Users
+                Usuários
               </NavLink>
             </li>
             <li className="nav-item">
@@ -32,7 +32,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/posts"
               >
-                Posts
+                Postagens
               </NavLink>
             </li>
             <li className="nav-item">
@@ -40,7 +40,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/todos"
               >
-                ToDos
+                Tarefas
               </NavLink>
             </li>
             <li className="nav-item">
@@ -48,7 +48,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/albums"
               >
-                Albums
+                Álbuns
               </NavLink>
             </li>
             <li className="nav-item">
@@ -56,7 +56,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/photos"
               >
-                Photos
+                Fotos
               </NavLink>
             </li>
             <li className="nav-item">
@@ -64,7 +64,7 @@ const Navbar = () => {
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
                 to="/comments"
               >
-                Comments
+                Comentários
               </NavLink>
             </li>
           </ul>

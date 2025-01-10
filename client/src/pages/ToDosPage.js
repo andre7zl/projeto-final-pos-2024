@@ -9,20 +9,20 @@ const ToDosPage = () => {
   useEffect(() => {
     api.get('/todos/')
       .then(response => setToDos(response.data))
-      .catch(error => console.error('Error fetching ToDos:', error));
+      .catch(error => console.error('Erro ao buscar ToDos:', error));
   }, []);
 
   const handleEdit = (todoId) => {
     api.get(`/todos/${todoId}/`)
       .then(response => setEditingToDo(response.data))
-      .catch(error => console.error('Error fetching ToDo:', error));
+      .catch(error => console.error('Erro ao buscar ToDo:', error));
   };
 
   const handleDelete = (todoId) => {
-    if (window.confirm('Are you sure you want to delete this ToDo?')) {
+    if (window.confirm('Tem certeza de que deseja excluir este ToDo?')) {
       api.delete(`/todos/${todoId}/`)
         .then(() => setToDos(todos.filter(todo => todo.id !== todoId)))
-        .catch(error => console.error('Error deleting ToDo:', error));
+        .catch(error => console.error('Erro ao excluir ToDo:', error));
     }
   };
 
@@ -30,22 +30,22 @@ const ToDosPage = () => {
     setEditingToDo(null);
     api.get('/todos/')
       .then(response => setToDos(response.data))
-      .catch(error => console.error('Error fetching ToDos:', error));
+      .catch(error => console.error('Erro ao buscar ToDos:', error));
   };
 
   return (
     <div className="container">
-      <h1>ToDos List</h1>
+      <h1>Lista de ToDos</h1>
       <button onClick={() => setEditingToDo({ title: '', user: '', completed: false })} className="btn btn-success mb-3">
-        Create ToDo
+        Criar ToDo
       </button>
       <div>
         {todos.map(todo => (
           <div key={todo.id} className="d-flex justify-content-between mb-2">
-            <span>{todo.title} - {todo.completed ? 'Completed' : 'Pending'}</span>
+            <span>{todo.title} - {todo.completed ? 'Concluído' : 'Pendente'}</span>
             <div>
-              <button onClick={() => handleEdit(todo.id)} className="btn btn-primary mr-2">Edit</button>
-              <button onClick={() => handleDelete(todo.id)} className="btn btn-danger">Delete</button>
+              <button onClick={() => handleEdit(todo.id)} className="btn btn-primary me-2">Editar</button>
+              <button onClick={() => handleDelete(todo.id)} className="btn btn-danger">Excluir</button>
             </div>
           </div>
         ))}

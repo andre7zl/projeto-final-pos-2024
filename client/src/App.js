@@ -8,12 +8,25 @@ import CommentsPage from './pages/CommentsPage';
 import AlbumsPage from './pages/AlbumsPage';
 import PhotosPage from './pages/PhotosPage';
 
+const Home = () => {
+  return (
+    <div className="container mt-5">
+      <h1>Projeto Final de POS</h1>
+      <p><strong>Autor:</strong> André Ivo Silva Rezende</p>
+      <p>React e Django REST Framework</p>
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      <Routes>      
+      <Routes>
+        {/* Página inicial */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Outras páginas */}
         <Route path="/users" element={<UsersPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/todos" element={<ToDosPage />} />

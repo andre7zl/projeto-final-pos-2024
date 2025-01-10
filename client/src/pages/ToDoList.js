@@ -6,10 +6,10 @@ const ToDoList = ({ todos, onEdit, onDelete }) => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>User</th>
-            <th>Completed</th>
-            <th>Actions</th>
+            <th>Título</th>
+            <th>Usuário</th>
+            <th>Concluído</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -17,10 +17,10 @@ const ToDoList = ({ todos, onEdit, onDelete }) => {
             <tr key={todo.id}>
               <td>{todo.title}</td>
               <td>{todo.user}</td>
-              <td>{todo.completed ? 'Yes' : 'No'}</td>
+              <td>{todo.completed ? 'Sim' : 'Não'}</td>
               <td>
-                <button className="btn btn-sm btn-warning me-2" onClick={() => onEdit(todo)}>Edit</button>
-                <button className="btn btn-sm btn-danger" onClick={() => onDelete(todo.id)}>Delete</button>
+                <button className="btn btn-sm btn-warning me-2" onClick={() => onEdit(todo)}>Editar</button>
+                <button className="btn btn-sm btn-danger" onClick={() => onDelete(todo.id)}>Excluir</button>
               </td>
             </tr>
           ))}

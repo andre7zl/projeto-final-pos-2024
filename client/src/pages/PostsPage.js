@@ -9,20 +9,20 @@ const PostsPage = () => {
   useEffect(() => {
     api.get('/posts/')
       .then(response => setPosts(response.data))
-      .catch(error => console.error('Error fetching posts:', error));
+      .catch(error => console.error('Erro ao buscar posts:', error));
   }, []);
 
   const handleEdit = (postId) => {
     api.get(`/posts/${postId}/`)
       .then(response => setEditingPost(response.data))
-      .catch(error => console.error('Error fetching post:', error));
+      .catch(error => console.error('Erro ao buscar post:', error));
   };
 
   const handleDelete = (postId) => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
+    if (window.confirm('Tem certeza que deseja excluir este post?')) {
       api.delete(`/posts/${postId}/`)
         .then(() => setPosts(posts.filter(post => post.id !== postId)))
-        .catch(error => console.error('Error deleting post:', error));
+        .catch(error => console.error('Erro ao excluir post:', error));
     }
   };
 
@@ -30,22 +30,22 @@ const PostsPage = () => {
     setEditingPost(null);
     api.get('/posts/')
       .then(response => setPosts(response.data))
-      .catch(error => console.error('Error fetching posts:', error));
+      .catch(error => console.error('Erro ao buscar posts:', error));
   };
 
   return (
     <div className="container">
-      <h1>Posts List</h1>
+      <h1>Lista de Posts</h1>
       <button onClick={() => setEditingPost({})} className="btn btn-success mb-3">
-        Create Post
+        Criar Post
       </button>
       <div>
         {posts.map(post => (
           <div key={post.id} className="d-flex justify-content-between mb-2">
             <span>{post.title}</span>
             <div>
-              <button onClick={() => handleEdit(post.id)} className="btn btn-primary mr-2">Edit</button>
-              <button onClick={() => handleDelete(post.id)} className="btn btn-danger">Delete</button>
+              <button onClick={() => handleEdit(post.id)} className="btn btn-primary me-2">Editar</button>
+              <button onClick={() => handleDelete(post.id)} className="btn btn-danger">Excluir</button>
             </div>
           </div>
         ))}
