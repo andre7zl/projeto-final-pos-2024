@@ -11,8 +11,8 @@ import PhotosPage from './pages/PhotosPage';
 const Home = () => {
   return (
     <div className="container mt-5">
-      <h1>Projeto Final de POS</h1>
-      <p><strong>Autor:</strong> André Ivo Silva Rezende</p>
+      <h1>Projeto Milgrau APP</h1>
+      <p><strong>Autores:</strong> André Ivo Silva Rezende & Ranilton costa de lima</p>
       <p>React e Django REST Framework</p>
     </div>
   );
