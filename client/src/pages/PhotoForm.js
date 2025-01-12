@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  title: '',
+  url: '',
+  thumbnail_url: '',
+  album: '',
+};
+
 const PhotoForm = ({ photoToEdit, onSave }) => {
-  const [photo, setPhoto] = useState({
-    title: '',
-    url: '',
-    thumbnail_url: '',
-    album: '',
-  });
+  const [photo, setPhoto] = useState(initialState);
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
-    if (photoToEdit) {
+    if (photoToEdit && photoToEdit.id) {
       setPhoto(photoToEdit);
+    } else {
+      setPhoto(initialState);
     }
+  }, [photoToEdit]);
 
+  useEffect(() => {
     api.get('/albums/')
       .then(response => setAlbums(response.data))
       .catch(error => console.error('Erro ao buscar álbuns:', error));
-  }, [photoToEdit]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,11 +36,17 @@ const PhotoForm = ({ photoToEdit, onSave }) => {
 
     if (photo.id) {
       api.put(`/photos/${photo.id}/`, photo)
-        .then(() => onSave())
+        .then(() => {
+          setPhoto(initialState);
+          onSave();
+        })
         .catch(error => console.error('Erro ao atualizar a foto:', error));
     } else {
       api.post('/photos/', photo)
-        .then(() => onSave())
+        .then(() => {
+          setPhoto(initialState);
+          onSave();
+        })
         .catch(error => console.error('Erro ao criar a foto:', error));
     }
   };

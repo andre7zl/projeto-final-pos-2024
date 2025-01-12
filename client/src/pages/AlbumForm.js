@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  title: '',
+  user: '',
+};
+
 const AlbumForm = ({ albumToEdit, onSave }) => {
-  const [album, setAlbum] = useState({
-    title: '',
-    user: '',
-  });
+  const [album, setAlbum] = useState(initialState);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (albumToEdit) {
+    if (albumToEdit && albumToEdit.id) {
       setAlbum(albumToEdit);
+    } else {
+      setAlbum(initialState);
     }
+  }, [albumToEdit]);
 
+  useEffect(() => {
     api.get('/users/')
       .then(response => setUsers(response.data))
       .catch(error => console.error('Erro ao buscar usuários:', error));
-  }, [albumToEdit]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,11 +34,17 @@ const AlbumForm = ({ albumToEdit, onSave }) => {
 
     if (album.id) {
       api.put(`/albums/${album.id}/`, album)
-        .then(() => onSave())
+        .then(() => {
+          setAlbum(initialState);
+          onSave();
+        })
         .catch(error => console.error('Erro ao atualizar álbum:', error));
     } else {
       api.post('/albums/', album)
-        .then(() => onSave())
+        .then(() => {
+          setAlbum(initialState);
+          onSave();
+        })
         .catch(error => console.error('Erro ao criar álbum:', error));
     }
   };

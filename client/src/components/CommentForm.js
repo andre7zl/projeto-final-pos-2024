@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  name: '',
+  email: '',
+  body: '',
+  post: '',
+};
+
 const CommentForm = ({ commentToEdit, onSave }) => {
-  const [comment, setComment] = useState({
-    name: '',
-    email: '',
-    body: '',
-    post: '',
-  });
+  const [comment, setComment] = useState(initialState);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (commentToEdit) {
+    if (commentToEdit && commentToEdit.id) {
       setComment(commentToEdit);
+    } else {
+      setComment(initialState); // Reset when there is no comment to edit
     }
 
     api.get('/posts/')
@@ -27,13 +31,20 @@ const CommentForm = ({ commentToEdit, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (comment.id) {
       api.put(`/comments/${comment.id}/`, comment)
-        .then(() => onSave())
+        .then(() => {
+          setComment(initialState); // Reset after update
+          onSave();
+        })
         .catch((error) => console.error('Erro ao atualizar comentário:', error));
     } else {
       api.post('/comments/', comment)
-        .then(() => onSave())
+        .then(() => {
+          setComment(initialState); // Reset after create
+          onSave();
+        })
         .catch((error) => console.error('Erro ao criar comentário:', error));
     }
   };

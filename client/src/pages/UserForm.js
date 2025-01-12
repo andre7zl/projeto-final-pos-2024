@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  name: '',
+  username: '',
+  email: '',
+  phone: '',
+  website: '',
+};
+
 const UserForm = ({ userToEdit, onSave }) => {
-  const [user, setUser] = useState({
-    name: '',
-    username: '',
-    email: '',
-    phone: '',
-    website: '',
-  });
+  const [user, setUser] = useState(initialState);
 
   useEffect(() => {
-    if (userToEdit) {
+    if (userToEdit && userToEdit.id) {
       setUser(userToEdit);
+    } else {
+      setUser(initialState);
     }
   }, [userToEdit]);
 
@@ -26,11 +30,17 @@ const UserForm = ({ userToEdit, onSave }) => {
 
     if (user.id) {
       api.put(`/users/${user.id}/`, user)
-        .then(() => onSave())
+        .then(() => {
+          setUser(initialState); // Reset after save
+          onSave();
+        })
         .catch((error) => console.error('Erro ao atualizar usuário:', error));
     } else {
       api.post('/users/', user)
-        .then(() => onSave())
+        .then(() => {
+          setUser(initialState); // Reset after save
+          onSave();
+        })
         .catch((error) => console.error('Erro ao criar usuário:', error));
     }
   };

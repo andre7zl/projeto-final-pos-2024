@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  title: '',
+  body: '',
+  user: '',
+};
+
 const PostForm = ({ postToEdit, onSave }) => {
-  const [post, setPost] = useState({
-    title: '',
-    body: '',
-    user: '',
-  });
+  const [post, setPost] = useState(initialState);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (postToEdit) {
+    if (postToEdit && postToEdit.id) {
       setPost(postToEdit);
+    } else {
+      setPost(initialState);
     }
+  }, [postToEdit]);
 
+  useEffect(() => {
     api.get('/users/')
       .then((response) => setUsers(response.data))
       .catch((error) => console.error('Erro ao buscar usuários:', error));
-  }, [postToEdit]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,14 +32,21 @@ const PostForm = ({ postToEdit, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (post.id) {
       api.put(`/posts/${post.id}/`, post)
-        .then(() => onSave())
-        .catch((error) => console.error('Erro ao atualizar o post:', error));
+        .then(() => {
+          setPost(initialState);
+          onSave();
+        })
+        .catch((error) => console.error('Erro ao atualizar a postagem:', error));
     } else {
       api.post('/posts/', post)
-        .then(() => onSave())
-        .catch((error) => console.error('Erro ao criar o post:', error));
+        .then(() => {
+          setPost(initialState);
+          onSave();
+        })
+        .catch((error) => console.error('Erro ao criar a postagem:', error));
     }
   };
 

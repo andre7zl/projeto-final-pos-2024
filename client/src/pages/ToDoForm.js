@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/api';
 
+const initialState = {
+  title: '',
+  user: '',
+  completed: false,
+};
+
 const ToDoForm = ({ todoToEdit, onSave }) => {
-  const [todo, setToDo] = useState({
-    title: '',
-    user: '',
-    completed: false,
-  });
+  const [todo, setToDo] = useState(initialState);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (todoToEdit) {
+    if (todoToEdit && todoToEdit.id) {
       setToDo(todoToEdit);
+    } else {
+      setToDo(initialState);
     }
+  }, [todoToEdit]);
 
+  useEffect(() => {
     api.get('/users/')
       .then((response) => setUsers(response.data))
       .catch((error) => console.error('Erro ao buscar usuários:', error));
-  }, [todoToEdit]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,11 +35,17 @@ const ToDoForm = ({ todoToEdit, onSave }) => {
     e.preventDefault();
     if (todo.id) {
       api.put(`/todos/${todo.id}/`, todo)
-        .then(() => onSave())
+        .then(() => {
+          setToDo(initialState);
+          onSave();
+        })
         .catch((error) => console.error('Erro ao atualizar ToDo:', error));
     } else {
       api.post('/todos/', todo)
-        .then(() => onSave())
+        .then(() => {
+          setToDo(initialState);
+          onSave();
+        })
         .catch((error) => console.error('Erro ao criar ToDo:', error));
     }
   };

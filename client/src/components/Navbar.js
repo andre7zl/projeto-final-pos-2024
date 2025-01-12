@@ -3,9 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Milgrau App</Link>
+        <Link className="navbar-brand text-white" to="/">Milgrau App</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -21,7 +21,7 @@ const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/users"
               >
                 Usuários
@@ -29,7 +29,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/posts"
               >
                 Postagens
@@ -37,7 +37,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/todos"
               >
                 Tarefas
@@ -45,7 +45,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/albums"
               >
                 Álbuns
@@ -53,7 +53,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/photos"
               >
                 Fotos
@@ -61,7 +61,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink 
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} 
+                className={({ isActive }) => `nav-link text-white ${isActive ? 'active' : ''}`} 
                 to="/comments"
               >
                 Comentários
